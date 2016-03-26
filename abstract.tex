@@ -1,0 +1,151 @@
+Establishing associations, known as a\emph{ trace links}, between each requirement
+and the artifacts that realize,or satisfy, it is essential to, e.g.,
+evaluating the impact of changes to requirements or implementation, or
+establishing satisfaction arguments. While research into this type of
+traceability, that we call \emph{Requirements Satisfaction Traceability},
+ has been an active research area for some time, none of the
+literature discusses the distinction between establishing "a" set of trace
+links between a requirement and its implementation (tracing *one* way the
+requirements is implemented) vs. "all" trace links (tracing *all* the ways a
+requirement is implemented), and the possible ramifications for how the trace
+links can be used in analysis. We examine how this distinction changes the way
+traceability is perceived, established, maintained, and used.  We introduce
+and discuss the notion of "complete" traceability, which considers *all* trace
+links between the requirements and the artifacts that work to satisfy the
+requirements, and contrast it with the partial traceability common in
+practice.  The intent of this RE@Next! paper is to highlight the aspect of
+completeness in traceability and discuss the ramifications of incomplete (or
+partial) traceability.
+
+\iffalse
+
+In system development, establishing an association, called \emph{trace link}, between each requirement and the other artifacts that realizes or \emph{satisfies} it has several benefits such as analysing the impact of a change, creating assurance arguments, etc. While establishing such trace links, called \emph{traceability}, has been a topic of great interest and research, to the best of our knowledge, none of the existing literature discuss the distinction between establishing (or need to establish) ``a'' trace link vs. ``all" trace links between the artifacts as well as its ramification on the analysis performed; in other words, it is unclear if traceability is about establishing one or all possible trace links between those artifacts. In this paper, we examine how this distinction changes the way traceability is perceived, established, maintained and used in practice.  We introduce the notion of ``complete" traceability, which constructs and considers {\em all} trace links between the requirements and the artifacts that realizes them. While complete traceability may seem impractical, our recent efforts demonstrate that this can be achieved in a automated and efficient manner in the realm of formal methods and model based development. This intent of this RE:Next! paper is to accentuate the aspect of completeness in traceability among the requirements engineering community as well as share our plans to automatically establish it.
+
+%<<<<<<< .mine
+%Requirements Traceability is the ability of the requirements to be relatable to another artifact in system development, in such a way it can be used for various activities such as impact analysis, dependency analysis, safety assessment etc. While establishing this traceability has been a topic of great interest and research, to the best of our knowledge, none of the existing literature discuses about establishing (or need to establish) ``a'' traceability vs. ``the" traceability. Intuitively, it is unclear if traceability is about establishing one or all possible associations between artifacts? In this RE Next! paper, we discuss the ramifications that this distinction can bring to the way traceability is perceived, created, maintained and used in practice. While establishing "the" traceability, or what we will call "complete" traceability, might seem impractical, our hypothesis is that, in the realm of formal methods and model based developments, it can be achieved in an automated and efficient manner without relying on human inputs/existing trace links. To test our hypothesis, we recently came up with an novel approach that automatically established several distinct ``a" traceability between requirements and its implementation. In this paper, we describe the approach, the initial results, and our next steps to extend this approach to achieve complete traceability.
+%||||||| .r4075
+%Requirements Traceability is the ability of the requirements to be relatable to another artifact in system development, in such a way it can be used for various activities such as impact analysis, dependency analysis, safety assessment etc. While establishing this traceability has been a topic of great interest and research, to the best of our knowledge, none of the existing literature discuses about establishing (or need to establish) ``a'' traceability vs. ``the" traceability. Intuitively, it is unclear if traceability is about establishing one or all possible associations between artifacts? In this RE Next! paper, we discuss the ramifications that this distinction can bring to the way traceability is perceived, created, maintained and used in practice. While establishing "the" traceability, or what we will call "complete" traceability, might seem impractical, our hypothesis is that, in the realm of formal methods and model based developments, it can be achieved in an automated and efficient manner without relying on human inputs/existing trace links. In this paper, we describe our fully automated approach, initial results, and insights into the nature of traceability and completeness of requirements.
+%=======
+
+
+An important subset of requirements traceability involves establishing  mapping between {\em functional} requirements, that describe expected behaviors of the system to be constructed, to the actual parts of the system that satisfy them.
+
+To establish such a traceability for functional requirements, current techniques are, at best, semi-automated, relying on a combination of manual effort on the part of requirements and system engineers and some assistance from machine learning techniques that suggest possible traceability links.
+
+We have pursued an approach to system construction in which compositional proofs are used to to establish {\em satisfaction arguments}.  These arguments prove that important behavioral requirements are satisfied by a given system architecture, down to the level of individual software components.  We recently created an algorithm to extract {\em inductive validity cores} (IVCs) from proofs, which determine minimal portions of a model necessary to construct the proofs.  In this work, we describe how IVCs can be used to automatically and precisely extract traceability information from the proof.  This approach has several benefits: (1) it provides a semantic basis for traceability of functional requirements, (2) it requires no manual effort on the part of the requirements engineer, and (3) it yields sound (in the sense of preserving the proof) and minimal traceability links.  The approach leads to questions about the nature of traceability: it is often the case that multiple minimal IVCs exist, so ``the'' traceability matrix becomes ``a'' traceability matrix.  In addition, IVCs can be used to reason about {\em completeness} of requirements over a given model.  In this paper, we describe our approach, initial results, and insights into the nature of traceability and completeness of requirements.
+
+\anitha{abstract 2 - 205 words}
+This paper is a discussion about a novel technique to establish precise traceability between requirements and the models that implement them, in model based developments. In prior work, we have pursued a model based approach in which mathematical proofs were automatically established by tools to verify if requirements were satisfied by the model. Recently, we developed a technique to extract the elements of the proof, that we call {\em inductive validity cores (IVC)}, to provide an explanation to how the tools verified the requirements. In this paper, we explain how we use the extracted IVCs to establish traceability between the requirements and the model. By iteratively using our approach one could get all possible trace links between the artifacts, that establishes \emph{complete} traceability. While current traceability techniques rely on manual efforts and/or some form of similarity between the entities of the artifacts, absence or inaccuracies in which traceability is inexact, our approach establishes semantically precise trace links by leveraging the mathematics underlying the model based verification tools. The main contribution of this paper is the discussion about the usefulness of establishing precise and complete traceability for every requirement as well as for the system in its entirety, that we believe has not received adequate attention in the requirements traceability community.
+
+
+
+
+We propose a fully automated approach to rigorously and completely establish requirements traceability in the context of model based development. In prior work, we have pursued a model based approach in which mathematical proofs were automatically established by tools to verify if requirements were satisfied by the model. Recently, we developed a technique to extract the elements of the proof, that we call {\em inductive validity cores (IVC)}, to provide an explanation to how the tools verified the requirements. In this paper, we explain how we use the extracted IVCs to establish sematically precise traceability between the requirements and the model. By iteratively using our approach one could get all possible trace links between the artifacts, that establishes \emph{complete} traceability between the artifacts. The main contribution of this paper is the discussion about the usefulness of establishing precise and complete traceability for every requirement as well as for the system as whole, that we believe has not received adequate attention in the traceability community.
+
+While current traceability techniques rely on manual efforts and/or some form of similarity between the entities of the artifacts, our approach establishes semantically precise trace links by leveraging the mathematics underlying the tools that automatically verify if the requirements are satisfied in the model of a system.
+
+
+
+
+ As an application of that approach, in this paper we propose  IVCs to establish traceability between the requirements and the model. By iteratively using our approach one could get all possible trace links between the artifacts, that establishes \emph{complete} traceability between the artifacts. The main contribution of this paper is the discussion about the usefulness of establishing precise and complete traceability for every requirement as well as for the system as whole, that we believe has not received adequate attention in the traceability community.
+
+In prior work, we have pursued a mathematical proof based model based verification approach in which mathematical proofs were used to establish the satisfaction of requirements. In an extension of that work, we developed a technique to extract the elements of the proof, that we call {\em inductive validity cores (IVC)}, to provide an explanation to how the requirements were satisfied in the model. In this paper, we ex
+
+ underlying capabilities of the
+
+underlying
+
+is based on establishing semantically precise trace links between the artifacts
+
+In prior work, we have pursued a model based approach in which mathematical proofs were used to verify the requirements. As a part of that work, we developed a technique to extract the elements of the proof, that we call {\em inductive validity cores (IVC)}, to provide an explanation to how the requirements were satisfied in the model. The approach described in this paper is an extension of that work that uses IVCs to establish traceability between the requirements and the model. By iteratively using our approach one could get all possible trace links between the artifacts, that establishes \emph{complete} traceability between the artifacts. The main contribution of this paper is the discussion about the usefulness of establishing precise and complete traceability for every requirement as well as for the system as whole, that we believe has not received adequate attention in the traceability community.
+
+
+, that leverages the capabilities of the model based tools without relying on existing trace links or human involvement. In prior work, we have pursued a model based approach in which mathematical proofs were automatically established to verify the requirements with respect to a model. As a part of that work, we developed a technique to extract the elements of the proof, that we call {\em inductive validity cores (IVC)}, to provide an explanation to how the requirements were verified in the model. In this work, we describe a novel approach to use IVCs to establish semantically precise trace links between the requirements and the model. By iteratively using our approach one could get all possible trace links between the artifacts, that establishes \emph{complete} traceability between the artifacts. The main contribution of this paper is the discussion about the usefulness of establishing precise and complete traceability for every requirement as well as for the system as whole, that we believe has not received adequate attention in the traceability community.
+\anitha{260 words}
+
+
+
+In Model based Development, requirements traceability concerns associating the requirements to the models that implement them. Such an association helps understand how a requirement is implemented, analyse the impact of requirements change, serves as an argument of assurance for the model etc. To establish such a traceability, current techniques, at best, semi-automated, rely on manual efforts and/or some form of similarity between the requirements and model elements; absence or inaccuracies in which the precision and adequacy of the traceability is compromised. \anitha{help me rephrase this}
+
+To address this concern, in this paper, we propose a fully automated approach to rigorously establish requirements traceability that leverages the capabilities of the model based tools without relying on existing trace links or human involvement. In prior work, we have pursued a model based approach in which mathematical proofs were automatically established to verify the requirements with respect to a model. As a part of that work, we developed a technique to extract the elements of the proof, that we call {\em inductive validity cores (IVC)}, to provide an explanation to how the requirements were verified in the model. In this work, we describe a novel approach to use IVCs to establish semantically precise trace links between the requirements and the model. By iteratively using our approach one could get all possible trace links between the artifacts, that establishes \emph{complete} traceability between the artifacts. The main contribution of this paper is the discussion about the usefulness of establishing precise and complete traceability for every requirement as well as for the system as whole, that we believe has not received adequate attention in the traceability community.
+\anitha{260 words}
+
+% that consequently raises a fundamental question whether existing techqniues of traceability is necessary in practice.
+
+%the discussion about the usefulness of establishing precise and complete traceability, that consequently raises a fundamental question whether quantification of traceability is necessary in practice. \anitha{I need to think about how i want to say this}
+
+
+
+%The approach leads to questions about the nature of traceability: it is often the case that multiple minimal IVCs exist, so ``the'' traceability matrix becomes ``a'' traceability matrix.  In addition, IVCs can be used to reason about {\em completeness} of requirements over a given model.  In this paper, we describe our approach, initial results, and insights into the nature of traceability and completeness of requirements.
+
+
+Requirements Traceability is concerned with mapping between requirements and other artifacts (including `lower level' requirements) that realize the requirements. An important subset of requirements traceability involves so-called {\em functional} requirements that describe expected behaviors of the system to be constructed.  To establish traceability for functional requirements, current techniques are, at best, semi-automated, relying on a combination of manual effort on the part of requirements and system engineers and some assistance from machine learning techniques that suggest possible traceability links.
+
+We have pursued an approach to system construction in which compositional proofs are used to to establish {\em satisfaction arguments}.  These arguments prove that important behavioral requirements are satisfied by a given system architecture, down to the level of individual software components.  We recently created an algorithm to extract {\em inductive validity cores} (IVCs) from proofs, which determine minimal portions of a model necessary to construct the proofs.  In this work, we describe how IVCs can be used to automatically and precisely extract traceability information from the proof.  This approach has several benefits: (1) it provides a semantic basis for traceability of functional requirements, (2) it requires no manual effort on the part of the requirements engineer, and (3) it yields sound (in the sense of preserving the proof) and minimal traceability links.  The approach leads to questions about the nature of traceability: it is often the case that multiple minimal IVCs exist, so ``the'' traceability matrix becomes ``a'' traceability matrix.  In addition, IVCs can be used to reason about {\em completeness} of requirements over a given model.  In this paper, we describe our approach, initial results, and insights into the nature of traceability and completeness of requirements.
+
+In the context of Model based Development, requirements traceability concerns associating the system requirements to the model that implements it. Such an association helps understand how a requirement is implemented in the model, analyse the impact of requirements change on the model, build an argument of assurance for the system etc. To establish that traceability, current techniques rely on some form of human input or existing links between the requirements and model such as matching texts, comments or identifiers, absence of which traceability is challenging to establish. On the contrary, without any human intervention or external pointers many model based tools have the capability to verify if the requirements are satisfied by the model, by automatically constructing a proof of satisfaction. Such tools use the elements of the model as the claims to prove if the requirement is satisfiable. In this paper, we propose an innovative approach to extract those model elements that were necessary in the proof -- we call them \emph{set of support} -- to establish its traceability with that respective requirement. Since it is well known that such proofs are not unique, we also propose an approach to get all the sets of support that establishes the complete traceability of satisfaction for a requirement. Such a traceability provides an accurate indication of which elements of the model are absolutely necessary and optional for a requirement (or all system requirements) to be satisfied. The main advantage of this approach is the precision in the way it establishes the traceability unlike the traditional techniques whose accuracy depends on the presence of right trace links.
+
+\fi
+% By getting all the sets of support, one can
+%
+%establish the complete traceability of every requirement. This traceability provides an accurate indication of which elements of the model are absolutely necessary and optional for a requirement (or all system requirements) to be satisfied. The main advantage of this approach, in addition to automation and existing trace links, is the precision in way it established the trace unlike the traditional techniques whose accuracy depends on the presence of right trace links.
+%
+%
+% prove the requirement to establish their traceability the requirements
+%
+%
+%
+%to establish the traceability the requirements and the model elements that . By exhaustively getting all the sets of support, one can get a complete traceability of the requirements. This traceability provides an accurate indication of which elements of the model are absolutely necessary and optional for a requirement (or all system requirements) to be satisfied. The main advantage of this approach, in addition to automation and existing trace links, is the precision in way it established the trace unlike the traditional techniques whose accuracy depends on the presence of right trace links.
+%
+%
+%
+%Such a proof is an evidence of
+%
+%our hypothesis is that by leveraging the capability of model checking tools, that constructs a proof to verify if the requirements are satisfied by the model, one could automatically and precisely establish traceability between the artifacts. A proof of satisfaction is automatically constructed by model based verification tools using the elements of the model as the claims. In this paper, we propose an innovative approach to extract the claims used in such a proof -- we call it \emph{set of support} -- to establish traceability. By exhaustively getting all the sets of support, one can get a complete traceability of the requirements. This traceability provides an accurate indication of which elements of the model are absolutely necessary and optional for a requirement (or all system requirements) to be satisfied. The main advantage of this approach, in addition to automation and existing trace links, is the precision in way it established the trace unlike the traditional techniques whose accuracy depends on the presence of right trace links.
+%
+%
+%
+% our hypothesis is that by leveraging the capability of the model based tools
+%
+%in MBD where sophisticated tools provide a formal proof of the requirements being satisfied by the models.
+%
+%where requirements and models are formalized representations, sophisticated tools provide a formal proof of the requirements being satisfied by the models.
+%
+%To establish such a traceability
+%
+%However, establishing such a traceability is a challenging task since most techniques rely on some form of identifiable links between the requirements and model such as matching texts, comments or identifiers to establish the trace, absence of which traceability is difficult to establish.
+%
+% However, establishing requirements traceability is generally a challenging task in traditional techniques since they rely on human inputs (links or matching texts within artifacts) to establish the trace,
+%
+%
+%our hypothesis is that by leveraging the capability of the model based tools we can automatically establish precise trace links between the requirements and the model without any existing trace links. In MBD where requirements and models are formalized representations sophisticated tools provide a formal proof of the requirements being satisfied by the models. Such a proof is constructed automatically by the tools using the elements of the model as the claims.
+%traceability can be effectively and rigorously established in model based developments.
+%
+%While establishing traceability is generally considered a challenging task, we believe that it can be effectively and rigorously established in model based developments.
+%
+%
+%Unlike the traditional techniques that rely on human inputs (links or matching texts within artifacts) to establish traceability,
+%
+%%
+%
+%
+%However, the task of establishing traceability is generally considered a challenging task
+%
+%While establishing traceability is generally considered a challenging task, we believe that in model based developments traceability can be established effectively. Unlike the traditional development techniques that rely on human inputs (links or matching texts) to establish traceability, in MBD where requirements are formalized representations and models are executable
+%
+%
+%
+%matching textual
+%
+%However, establishing the traceability is not trivial, due to the complexity of the models.
+%
+%
+% envi   sioned for a traditional software lifecycle, involving either requirements database tools or textual documents. Integrating MDD into a traceability-based workflow is a relatively new challenge.
+%
+%especially since the two are usually stored and presented in very different ways.
+%
+%unlike the traditional traceability where
+%
+%While the benefits of doing so is widely accepted, it is unfortunately, not a trivial task to achieve.
+%
+% - Requirements flow down - How requirements were allocated to component requirements are necessary to satisfy the system level requirements - such information is useful for various purposes such as impact analysis, assurance etc. - - current approaches manual/semiautomatic - manually creating and maintaining such links is very difficult - in this paper we propose an automatic way to establish trace links between system requirements and component requirements that are necessary to satisfy them - currently we have a compositional verification approach that allows us to verify requirements flow down - we extended it to automatically establish trace links - we call it "set of support". However, the set of support is not unique. By generating all the possible set of support, what we classify the component requirements into the ones that common to all SOP "Must", that implies that component requirement is absolutely necessary and "May" groups that are not present in every SOP.
