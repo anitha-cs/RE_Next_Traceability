@@ -1,60 +1,65 @@
 \section{Motivating Example}
 
-Consider a safety device whose requirement is to \emph{raise an alarm if a hazardous condition occurs and is persistent for 5 seconds}. The device is composed of two redundant sensors (for fault tolerance) whose requirement is to \emph{detect the hazardous condition and report if it is persistent for 5 seconds} and a buzzer that \emph{sounds an audible alarm if either one of sensors report the hazard}; \emph{the buzzer shall otherwise remain silent}. Since the sensors are redundant, to establish that the system level requirements are satisfied, one of the sensors and the buzzer is sufficient. Say, we only capture the trace from the requirement to the requirements of one of the sensors and the buzzer. Now, if there is a change in device requirement to \emph{raise an alarm if the hazardous condition persists for 3 seconds}, the traceability that we have established only helps identify that one sensor's behaviour should be changed. Since the alternate satisfaction is not documented, if the sensor that was modified for the new requirement fails then the requirement is no longer met and may causes safety hazards. Further, an astute reader might have noticed that the buzzer has two requirements of which only the first one contributes to satisfying the system requirement whereas the other does not. If we were to establish all the trace links between the requirements and its realization, one could use it to identify elements of the realization that do not contribute to satisfying any requirement. While we illustrated with a toy example, in practice systems are complex with hundreds of system requirements and numerous components with potentially thousands of component requirements that may induce several ways to satisfy the requirements. Without insight into the all those ways, in our opinion, the results of analysis using such (partial) traceability with be misleading. Unfortunately, neither the completeness of traceability nor its benefits are discussed in the existing literature.
+\mike{Yuck.}
+
+Consider a safety device whose requirement is to \emph{raise an alarm if a hazardous condition occurs and is persistent for 5 seconds}. The device is composed of two redundant sensors (for fault tolerance) whose requirement is to \emph{detect the hazardous condition and report if it is persistent for 5 seconds} and a buzzer that \emph{sounds an audible alarm if either one of sensors report the hazard}; \emph{the buzzer shall otherwise remain silent}. Since the sensors are redundant, to establish that the system level requirements are satisfied, one of the sensors and the buzzer is sufficient. Suppose we only capture the trace from the requirement to the requirements of one of the sensors and the buzzer. Now, if there is a change in device requirement to \emph{raise an alarm if the hazardous condition persists for 3 seconds}, the traceability that we have established only helps identify that one sensor's behaviour should be changed. Since the alternate satisfaction is not documented, if the sensor that was modified for the new requirement fails then the requirement is no longer met and may causes safety hazards. Further, an astute reader might have noticed that the buzzer has two requirements of which only the first one contributes to satisfying the system requirement whereas the other does not. If we were to establish all the trace links between the requirements and its realization, one could use it to identify elements of the realization that do not contribute to satisfying any requirement. While we illustrated with a toy example, in practice systems are complex with hundreds of system requirements and numerous components with potentially thousands of component requirements that may induce several ways to satisfy the requirements. Without insight into the all those ways, in our opinion, the results of analysis using such (partial) traceability with be misleading. Unfortunately, neither the completeness of traceability nor its benefits are discussed in the existing literature.
 
 \section{Formal Representation of Traceability}
 \label{sec:motivation}
+\newcommand{\satisfies}{\vdash_{\!\!s}}
+\newcommand{\nsatisfies}{\nvdash_{\!\!s}}
 
-In its simplest sense, traceability is capturing the relationship between artifacts. There are three building blocks for traceability - a \emph{source artifact} from which relationship should be established, \emph{the target artifact} to which the source artifact be related and the \emph{trace relationship}, that describes the association between the artifacts. For requirements satisfaction traceability, the source artifacts are the requirements, the target artifacts are the elements that realize the requirement such as lines of code, design elements, assumptions or low level requirements, and the trace relationship is \emph{satisfied by} (Formally $S \vdash R$ should be read as: the set of target artifacts S satisfies R). While the trace direction could be bidirectional, for now lets consider trace from requirements to its realization. In the next section we explain how this can be used to establish the other direction.
+In its simplest sense, traceability is capturing the relationship between artifacts. There are three building blocks for traceability - a \emph{source artifact} from which relationship should be established, \emph{the target artifact} to which the source artifact be related and the \emph{trace relationship}, that describes the association between the artifacts.  To provide notation, we write $T \vdash e$ to state that a set of target artifacts $T$ is sufficient to establish a traceability relationship $\vdash$ to source element $e$.
+For requirements satisfaction traceability, the source artifacts are requirements $\Delta$, the target artifacts $\Sigma$ are the elements that realize the requirement such as lines of code, design elements, system or world assumptions, or lower-level requirements, and the trace relationship is \emph{satisfies}.  Thus, we write $S \satisfies r$ for $S \subseteq \Sigma$ and $r \in \Delta$ when set of target elements $S$ satisfies requirement $r$.  We will use $S, S'$ to denote sets of target elements and $r, r'$ to denote requirements.
+%
+%While the trace direction could be bidirectional, for now lets consider trace from requirements to its realization. In the next section we explain how this can be used to establish the other direction.
+%
+%Let $R$ denote the set of all requirements of the system %where $R = \{R_1, R_2...R_n\}$  and $R_{1...n}$ are individual requirements. Let
+%and $I$ denote the set of all target artifacts. %where $I = \{I_1, I_2...I_m\}$ and $I_{1...m}$ denotes each target artifact.
+%As mentioned earlier, the target artifact could be lines of source code, model elements (in model based development), assumptions etc. %\anitha{In the following whenever we use $r$ we mean it is a single requirement, $r \in R$.}
+%A satisfaction argument establishes the validity of a requirement through a sufficient set of target artifacts. \anitha{am I saying the right thing?}. Formally it is represented as,
+%
+%$$ S \satisfies r $$
+%$$ where~r \in R~and~S\subseteq I$$
+%
+We assume that the satisfaction deduction $\satisfies$ is monotonic on the subset relation over $\Sigma$, that is, if $S \subset S'$ and $S \satisfies r$, then $S' \satisfies r$.
 
-Let $R$ denote the set of all requirements of the system %where $R = \{R_1, R_2...R_n\}$  and $R_{1...n}$ are individual requirements. Let
-and $I$ denote the set of all target artifacts. %where $I = \{I_1, I_2...I_m\}$ and $I_{1...m}$ denotes each target artifact.
-As mentioned earlier, the target artifact could be lines of source code, model elements (in model based development), assumptions etc. %\anitha{In the following whenever we use $r$ we mean it is a single requirement, $r \in R$.}
+%$$ (S'\subseteq I~and~S \subset S' ~and~ S \satisfies r) \implies S' \satisfies r$$
 
-A satisfaction argument establishes the validity of a requirement through a sufficient set of target artifacts. \anitha{am I saying the right thing?}. Formally it is represented as,
+%We assume that satisfaction argument is monotonic on I, that is: $(S_x \subset S_y \land S_x \satisfies R_x) \implies S_y \satisfies R_x$.
+%, $R_x$, establishes, $S_x \satisfies Rx$, where $S_x = \{I_1, I_2,... I_k\}$, the elements of the target artifact that together satisfy the requirement.
 
-$$ S \vdash r $$
-$$ where~r \in R~and~S\subseteq I$$
+%A \emph{requirement satisfaction trace (RST)} is the relation between a requirement and the set of target artifacts that establish the satisfaction of the requirements.  %While traditional way of establishing a trace concerns relating a requirement to a target artifact, the requirements satisfaction trace relates the requirement to a set of target artifacts that can demonstrate the satisfaction of requirements, thus establish a sematic basis for the traceability.
 
-We assume that the satisfaction argument \anitha{or S?} is monotonic on $I$, that is
-$$ (S \subset S' ~and~ S \vdash r) \implies S' \vdash r$$
+%$$ RST: \Delta \times 2^{\Sigma}$$
+%where $$ RST(r, S) \equiv S \satisfies r $$
 
-%$$ (S'\subseteq I~and~S \subset S' ~and~ S \vdash r) \implies S' \vdash r$$
+%\anitha{I know I asked this before, but just to confirm, is it enough that we mentioned that we assume monotonicity earlier in this section; but somehow it reads as if we discuss about it only in that context of satisfaction argument?}
+%\anitha{$$ \forall i \in I \cdot S \cup i \satisfies r) $$}
 
-%We assume that satisfaction argument is monotonic on I, that is: $(S_x \subset S_y \land S_x \vdash R_x) \implies S_y \vdash R_x$.
-%, $R_x$, establishes, $S_x \vdash Rx$, where $S_x = \{I_1, I_2,... I_k\}$, the elements of the target artifact that together satisfy the requirement.
+\mike{I'm renaming $RST_{m}$ the set of support $SOS$; the fewer terms, the better }
 
-A \emph{requirement satisfaction trace (RST)}, that is uses a satisfaction argument as a basis, is the association between the requirement to the set of target artifacts that together can establish the satisfaction of the requirements. While traditional way of establishing a trace concerns relating a requirement to a target artifact, the requirements satisfaction trace relates the requirement to a set of target artifacts that can demonstrate the satisfaction of requirements, thus establish a sematic basis for the traceability.
+The monotonicity of the satisfaction relation means that, unless {\em all} elements of the implementation $\Sigma$ are required for a proof, there are multiple implementation sets $S \subset S' \subset \ldots \subset \Sigma$ that can satisfy a given requirement $r$.  However, we are primarily interested in {\em minimal} sets that satisfy $r$; tracing a requirement to the entire implementation is not particularly enlightening!  We call a minimal set of target artifacts the \emph{set of support} for that requirement, and define the $SOS$ relation to associate sets of support to requirements.
 
-$$ RST: r \times S$$
-$$where~~r \in R~and~S \subseteq I~and~ S \vdash r $$
+$$ \ SOS(r, S) \equiv S \satisfies r~\land (\forall S'\ .\ S' \subset S \implies S' \nsatisfies r) $$
 
-\anitha{I know I asked this before, but just to confirm, is it enough that we mentioned that we assume monotonicity earlier in this section; but somehow it reads as if we discuss about it only in that context of satisfaction argument?}
-%\anitha{$$ \forall i \in I \cdot S \cup i \vdash r) $$}
+$SOS$ maps sets of support to a requirement. As mentioned earlier, there could be many sets of support for a requirement. To capture that notion, we define, \emph{all sets of support ($ASOS$)} for a requirement as an association to all its sets of support.
 
-While the set of target artifacts in a requirement satisfaction trace can be include all elements of $I$, of interest are those target artifacts that are (only) necessary to satisfy the requirement; this avoids a trivial satisfaction argument as well as irrelevant traces. Hence, we define a \emph{minimal requirements satisfaction trace($RST_m$)} that associates a requirement to a set of target artifacts that are necessary to satisfy that requirement. We call this minimal set of target artifacts as the \emph{set of support} for that requirement.
+$$ ASOS(r) : \{\ S | (r,S) \in SOS(r,S)\ \} $$
 
-$$ RST_m: r \times S $$
-$$ where~~r \in R~and~S \subseteq I~and~ S \vdash r~and $$
-$$ \forall e \in S \cdot S \setminus e \nvdash r $$
-
-While $RST_m$ maps one set of support to a requirement, as mentioned earlier, there could be many sets of support for a requirement. To capture that notion, we define, \emph{complete minimal requirement satisfaction trace ($CRST_m$)} for a requirement as an association to all its set of support.
-
-$$ CRST_m (r) : \{ S | (r,S) \in RST_m(r,S) \} $$
-
-The $CRST_m$ for a requirement, can be envisioned as a matrix in which each row represents a target artifact, columns represents the requirement, and the relationship between the two are recorded at the cells of their intersection. The information in each column in this matrix provides a satisfaction argument for that requirement.
-
-The $CRST_m$ for all requirements (formally $\forall (r \in R)~CRST_m(r)$), represents the complete traceability of the system. One can envision this as a 3 dimensional traceability matrix, where the third dimension is each requirement.
+The $ASOS$ for a requirement can be envisioned as a matrix in which each row represents a target artifact in $\Sigma$, each column represents a set of support for requirement $r$, and cells contain an 'x' if the target artifact is used in the set of support and is otherwise blank.\mike{Does this really aid explanation?}
+%
+The set of $ASOS$-es for all requirements represents the complete traceability of the system. One can envision this as a 3 dimensional traceability matrix, where the third dimension is each requirement.\mike{again, is this helpful?}
 
 
 %$$ CRST_m: r \longrightarrow \mathfrak{S}$$
 %$$ where~~r \in R~and~\mathfrak{S} = \bigcup(S)$$
-%$$ \forall e \in \mathfrak{S} \cdot e \vdash r ~and~ \not \exists e'\subseteq I ~and~e'\notin \mathfrak{S}~and~ e' \vdash r $$
+%$$ \forall e \in \mathfrak{S} \cdot e \satisfies r ~and~ \not \exists e'\subseteq I ~and~e'\notin \mathfrak{S}~and~ e' \satisfies r $$
 
-%as $\Sigma_{mx} = \{S_{xm1}, S_{xm2}....S_{xmk}\}$ where each $S_{xk} \vdash R_x$. Similarly, the \emph{complete minimal requirements satisfaction traces} for all requirements for the system is represented as \anitha{can i union tuples?}  $$\bigcup_{\forall x, (R_x \in R)} (R_x, \Sigma_{mx}, \vdash)$$
+%as $\Sigma_{mx} = \{S_{xm1}, S_{xm2}....S_{xmk}\}$ where each $S_{xk} \satisfies R_x$. Similarly, the \emph{complete minimal requirements satisfaction traces} for all requirements for the system is represented as \anitha{can i union tuples?}  $$\bigcup_{\forall x, (R_x \in R)} (R_x, \Sigma_{mx}, \satisfies)$$
 
 %
-%While $RST_m$ maps one set of support to a requirement, as mentioned earlier, there could be many sets of support for a requirement. To capture that notion, we define, \emph{complete minimal requirement satisfaction trace} for a requirement $R_x$, can be represented as $\Sigma_{mx} = \{S_{xm1}, S_{xm2}....S_{xmk}\}$ where each $S_{xk} \vdash R_x$. Similarly, the \emph{complete minimal requirements satisfaction traces} for all requirements for the system is represented as \anitha{can i union tuples?}  $$\bigcup_{\forall x, (R_x \in R)} (R_x, \Sigma_{mx}, \vdash)$$
+%While $RST_m$ maps one set of support to a requirement, as mentioned earlier, there could be many sets of support for a requirement. To capture that notion, we define, \emph{complete minimal requirement satisfaction trace} for a requirement $R_x$, can be represented as $\Sigma_{mx} = \{S_{xm1}, S_{xm2}....S_{xmk}\}$ where each $S_{xk} \satisfies R_x$. Similarly, the \emph{complete minimal requirements satisfaction traces} for all requirements for the system is represented as \anitha{can i union tuples?}  $$\bigcup_{\forall x, (R_x \in R)} (R_x, \Sigma_{mx}, \satisfies)$$
 %
 %
 % %
@@ -63,7 +68,7 @@ The $CRST_m$ for all requirements (formally $\forall (r \in R)~CRST_m(r)$), repr
 %
 % such that I_1 \wedge I_2 \wedge... I_k are the elements of the target artifact that are necessary to satisfy the requirement. The term ``necessary" elements means that removing one of them from $S_x$ invalidates the satisfaction argument. Formally, $\forall j (S_x\setminus{I_j} \nvdash R_x)$ where $(I_j \in S_x)$. We call such an $S_x$ as a \emph{set of support} for the requirement $R_x$.
 
-% that can be derived from a satisfaction argument can be represented a tuple (R_i, S_i, $\vdash$), where $R_i$ denotes a requirement (the source artifact), $S_i$ is a set of support for $R_i$ and the $\vdash$ is the relationship between the two. Although it may seem unnecessary to include the relationship in the tuple, since we call it the "satisfaction" trace, explicitly stating it ensures that the rationale for the trace is neither lost nor mis-interpreted. While the traditional way of establishing is trace concerns a requirement and an element in the target artifact, the requirements satisfaction trace relates a group of target artifact elements to a requirement that together (formally conjunction) and "only" if they are together will satisfy the requirements.
+% that can be derived from a satisfaction argument can be represented a tuple (R_i, S_i, $\satisfies$), where $R_i$ denotes a requirement (the source artifact), $S_i$ is a set of support for $R_i$ and the $\satisfies$ is the relationship between the two. Although it may seem unnecessary to include the relationship in the tuple, since we call it the "satisfaction" trace, explicitly stating it ensures that the rationale for the trace is neither lost nor mis-interpreted. While the traditional way of establishing is trace concerns a requirement and an element in the target artifact, the requirements satisfaction trace relates a group of target artifact elements to a requirement that together (formally conjunction) and "only" if they are together will satisfy the requirements.
 
 
 %\anitha{Explains SA and traceability - formally definitions of each requiremnt, each entitiy of trace artifact, set of support, trace link, traditional requirements traceability and  one requirements satsifaction traceability and all RST}
