@@ -37,7 +37,7 @@ We assume that the satisfaction deduction $\satisfies$ is monotonic on the subse
 %\anitha{I know I asked this before, but just to confirm, is it enough that we mentioned that we assume monotonicity earlier in this section; but somehow it reads as if we discuss about it only in that context of satisfaction argument?}
 %\anitha{$$ \forall i \in I \cdot S \cup i \satisfies r) $$}
 
-\mike{I'm renaming $RST_{m}$ the set of support $SOS$; the fewer terms, the better }
+%\mike{I'm renaming $RST_{m}$ the set of support $SOS$; the fewer terms, the better }
 
 The monotonicity of the satisfaction relation means that, unless {\em all} elements of the implementation $\Sigma$ are required for a proof, there are multiple implementation sets $S \subset S' \subset \ldots \subset \Sigma$ that can satisfy a given requirement $r$.  However, we are primarily interested in {\em minimal} sets that satisfy $r$; tracing a requirement to the entire implementation is not particularly enlightening!  We call a minimal set of target artifacts the \emph{set of support} for that requirement, and define the $SOS$ relation to associate sets of support to requirements.
 
@@ -47,9 +47,11 @@ $SOS$ maps sets of support to a requirement. As mentioned earlier, there could b
 
 $$ ASOS(r) : \{\ S | (r,S) \in SOS(r,S)\ \} $$
 
-The $ASOS$ for a requirement can be envisioned as a matrix in which each row represents a target artifact in $\Sigma$, each column represents a set of support for requirement $r$, and cells contain an 'x' if the target artifact is used in the set of support and is otherwise blank.\mike{Does this really aid explanation?}
+The set of $ASOS$-es for all requirements represents the complete traceability of the system.
+
+%The $ASOS$ for a requirement can be envisioned as a matrix in which each row represents a target artifact in $\Sigma$, each column represents a set of support for requirement $r$, and cells contain an 'x' if the target artifact is used in the set of support and is otherwise blank.\mike{Does this really aid explanation?}
 %
-The set of $ASOS$-es for all requirements represents the complete traceability of the system. One can envision this as a 3 dimensional traceability matrix, where the third dimension is each requirement.\mike{again, is this helpful?}
+%The set of $ASOS$-es for all requirements represents the complete traceability of the system. One can envision this as a 3 dimensional traceability matrix, where the third dimension is each requirement.\mike{again, is this helpful?}
 
 
 %$$ CRST_m: r \longrightarrow \mathfrak{S}$$
