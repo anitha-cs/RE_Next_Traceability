@@ -3,3 +3,6 @@ Main.blg
 *.log
 *.bbl
 Main.synctex
+quarantine.tex
+compositional.tex
+background.tex
