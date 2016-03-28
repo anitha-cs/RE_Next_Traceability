@@ -1,33 +1,14 @@
-\anitha{ I am working on this following section}...
 \section{Discussion}
 
-While the notion of completeness in requirements traceability is not  a new topic, our argument is that it is not been rigorously defined and assessed.
+While the notion of correctness and completeness in requirements traceability is not a new topic of discussion, our argument is that it is not been rigorously defined and assessed. The intent of this RE@Next! paper is to clarify the foundations of tracing requirements to its realization - in particular the requirements satisfaction traceability -- and explaining its the benefits and ramifications.
+
+While there are enormous amount work in the area of requirements traceability, there are no, to the best of our knowledge, rigours yardsticks or metrics to quantitatively and qualitatively access the trace links. This raises a qualm about the way traceability is assessed. Hence, we believe that there is a strong need to identify metrics, define approaches and develop tools that will rigorously assess trace links.
+
+In this paper we define a strong theoretical framework to understand and assess requirements satisfaction traceability, that we believe is an initial attempt towards addressing the above need. By defining a requirements satisfaction trace from a requirement to a set of support, rather than a target artifact, we intertwine the rationale to verify/validate its correctness automatically. Such traces are self-sufficient to be verified for correctness, without the need for another source of truth or spending enormous amount of time to validate them. By examining these traces one could verify and validate if the system indeed satisfies the requirements in s intended ways. Further, this helps redefine the notion of completeness in traceability from capturing trace links to all requirements to capturing *all* trace links to all requirements. It is worth reiterating that our goal is not yet another formalization of traceability but to provide the foundation for any future research on satisfaction trace link generation and assessment.
+
+Contrary to the general notion that it is impossible or extraordinarily difficult to identify all trace link in practice~\cite{stravsunskas2002traceability}, some of the initial results from our recent efforts~\cite{2016arXiv160304276G} indicate that such complete requirements satisfaction trace can be established, in fact automatically in the realm of formal methods and model based developments. 
 
 
-Although, completeness in requirements traceability has always been desired, to the best of our knowledge, determining the completeness in establishing trace has  has not been discussed rigorously. There is almost always a human input involved in assessing the completeness and correctness of the trace links.
 
+While the details the approach and initial results are not in scope of this paper, an interested reader is directed to~\cite{2016arXiv160304276G}.
 
-Completeness and correctness of trace links go hand-in-hand.
-
-
-
-impossible or extraordinarily difficult to identify
-
-
-To paritally address this concern for satisfaction arguments, \emph{Rich traceability} introduced the notion of AND and OR composition.However, this approach was based on traceable links in the artifacts, that had to be present/put in by humans that makes it time consuming, error prone.... \anitha{i dont know what to say}. We want to build a complete satisfaction argument that captures all the associations between the requirements and its components. This way it achieves far more purposes than just satisfaction.
-
-Complete traceability
-
-This information reveals the propagation of change that can result when a specific requirement is deleted or modified. If you’ve mapped specific requirements into tasks in your project’s work-breakdown structure, those tasks will be affected when a requirement is changed or deleted.
-
-At one level, requirements tracing provides a way to demonstrate compliance with a contract or specification. At a more sophisticated level, requirements tracing can improve the quality of your products, reduce maintenance costs, and facilitate reuse. Following are some potential benefits of implementing requirements traceability.
-
-
-Related work on traceability
-
-- Rich traceability
-
-- automated analysis
-
-\anitha{I dont know if we need it here or in the conclusion}
-Contrary to the general notion that it is impossible or extraordinarily difficult to identify all trace link in practice~\cite{stravsunskas2002traceability}, some of the initial results from our recent efforts~\cite{IVCTechReport} indicate that such complete requirements satisfaction trace can be established, in fact automatically in the realm of formal methods and model based developments. In the next section, we breifely describe our prior work and our plans to extend it to establish complete traceability. While the details the approach and initial results are not in scope of this paper, an interested reader is directed to~\cite{IVCTechReport}.

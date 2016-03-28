@@ -1,9 +1,16 @@
 \section{Complete Traceability}
 \label{sec:discussion}
 
-Through formal definitions in the previous section we highlight two critical facets -- the semantics and completeness -- in establishing traceability. In our experience, we found that just being able to trace a requirement to a target artifact that satisfies it, say a line of code, is not useful; a holistic view of how that line of code in conjunction with other related lines of code satisfy the requirement provides meaningful information to perform analysis such as assessing the impact of a change. By defining a trace from requirements to the set of target artifacts, we advocate that traceability be captured in a way that upholds its semantic rationale. Further, we also found that performing analysis, such as impact analysis, using a partial set of trace links may result in imprecise results and misplaced confidence about the system. By considering $SOS$ trace links and complete traces for each requirement, we can assess analyses related to requirements satisfaction traceability on a proper semantic foundation. In this section, we elaborate on how the semantic foundations in the previous section help us understand, assess, and use traceability precisely.
+Through formal definitions in the previous section we highlight two critical facets -- the semantics and completeness -- in establishing traceability. In practice, just being able to trace a requirement to a target artifact that satisfies it, say a line of code, is not useful~\cite{guo2015trace}; a holistic view of how that line of code in conjunction with other related lines of code satisfy the requirement provides meaningful information to perform analysis such as assessing the impact of a change~\cite{hull2010requirements}. By defining a trace from requirements to the set of target artifacts, we advocate that traceability be captured in a way that upholds its semantic rationale. Further, we also found that performing analysis, such as impact analysis, using a partial set of trace links may result in imprecise results and misplaced confidence about the system. By considering $SOS$ trace links and complete traces for each requirement, we can assess analyses related to requirements satisfaction traceability on a proper semantic foundation. In this section, we elaborate on how the semantic foundations in the previous section help us understand, assess, and use traceability precisely.
 
 %that we explain in the previous section not only provides an in-depth understanding of how the system satisfies requirements but acts as a metric to assess the quality of traceability established for a system and enhances the precision of analysis using the traceability information.
+
+
+\begin{figure}[htb]
+\includegraphics[width=\columnwidth]{images/may_must_1.pdf}
+\caption{May - Must - Irrelevant Set of Support}\label{fig:maymust}
+\end{figure}
+
 
 \subsection{Categorizing the Set of Support}
 
@@ -19,11 +26,6 @@ Establishing $ASOS$ for a requirement, one gets a clear picture of the all possi
   \item \textbf{IRRELEVANT} elements - target artifacts that are not in any of the set of support (green stars in Figure~\ref{fig:maymust}). $$IRR(r) = I \setminus (\bigcup ASOS (r))$$
 \end{itemize}
 
-\begin{figure}[htb]
-\includegraphics[width=\columnwidth]{images/may_must.pdf}
-\caption{May - Must - Irrelevant Set of Support}\label{fig:maymust}\anitha{I should change it from not to irrelevant}
-\end{figure}
-
 This categorization helps identify the role and relevance of each target artifact in satisfying a requirement. The MUST elements are those target artifacts that are absolutely necessary for the requirement satisfaction. Hence, any change to these elements will most likely impact on each other. On the other hand, MAY elements indicate those target artifacts that satisfy the requirement in one of the possible ways.  Any change to just one of these elements will not affect the satisfaction of that requirement. The IRRELEVANT elements are never required to satisfy the requirement, so neither does a change in these artifacts affect the satisfaction of the requirement, nor does a change in the requirement necessitate a change in these elements (at least in terms of satisfaction).
 
 
@@ -32,8 +34,6 @@ This categorization helps identify the role and relevance of each target artifac
 The categorization of the set of support to be useful in several analyses:
 
 \paragraph{Impact Analysis}: The $ASOS$ set improves understanding of how a change in the requirement will affect the target artifacts and vice versa. While the $ASOS$ as a whole gives a clear picture of various ways a requirement is satisfied by the system, the categorization of target artifacts helps precisely assess and plan when and where the changes have to be implemented. The $MUST$ elements are those target artifacts that are highly likely to change with any change in the requirement, whereas not all $MAY$ elements may need to be changed. On the other hand, if the $MUST$ set is empty ($MUST(r) = \emptyset$) -- there are no common target artifacts between the sets of support -- it indicates that the requirement has been (intentionally or unintentionally) implemented in independent ways, such as fault tolerant systems. For such requirements, one has to carefully analyse and decide if the target artifacts in all or one disjoint set needs to be changed. These analysis could be performed either from the perspective of one or all requirements of the system.
-
-\anitha{Should we we have a series of pictures here illustrating different options we want discuss?}
 
 From the target artifact side, this categorization helps analyse their \anitha{degree of freedom?} to change. Say, we decide to change a target artifact in the $MAY$ set for a requirement. While one might think that it is safe to change this artifact since it does not affect that requirement's satisfaction, an examination of the $ASOS$ sets of other requirements helps identify if it is indeed safe to change that artifact. If it is present in the $MUST$ set for another requirement, then a change to this artifact will definitely impact that requirement. However, if it is in the $MAY$ sets for all the requirements, then it is clearly safe to change. This categorization helps us to precisely assess critical dependencies between the target artifacts and the satisfaction of requirements and thus enables a precise bi-directional impact analysis of a change.
 
