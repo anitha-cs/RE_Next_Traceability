@@ -29,9 +29,13 @@ This categorization helps identify the role and relevance of each target artifac
 
 \subsection{Using Traces for Precise Analysis}
 
-The categorization of the set of support to be useful in several analyses: 
+The categorization of the set of support to be useful in several analyses:
 
-\paragraph{Impact Analysis}: The $ASOS$ set improves understanding of how a change in the requirement change will affect the target artifacts and vice versa. This categorization precisely helps identify those parts of the system that definitely have to change when there is a change in requirement. MUST elements are those target artifacts that are highly likely to change with any change in the requirement, whereas not all MAY elements may need to be changed. Obviously, one need not worry about the IRR elements. If we examine all the sets of support for all requirements and categorize them, then the elements in the MUST set describe target artifacts that are critical for all requirements~\mike{should we characterize this formally?}.  %This helps assess how a change in one element may affect other requirements.
+\paragraph{Impact Analysis}: The $ASOS$ set improves understanding of how a change in the requirement change will affect the target artifacts and vice versa. This categorization precisely helps identify those parts of the system that definitely have to change when there is a change in requirement. MUST elements are those target artifacts that are highly likely to change with any change in the requirement, whereas not all MAY elements may need to be changed. On the other hand, if a MUST set is empty -- there are no common target artifacts between the sets of support -- it indicates that the requirement has been (intentionally or unintentionally) implemented in independent ways, such as fault tolerant systems. 
+
+
+
+If we examine all the sets of support for all requirements and categorize them, then the elements in the MUST set describe target artifacts that are critical for all requirements~\mike{should we characterize this formally?}.  %This helps assess how a change in one element may affect other requirements.
 
 
 If we examine changing a target artifact, if it appears in the MUST set for any requirement, then this requirement must be re-verified.  However, if it appears in the MAY set for the requirement, then we can instead remove any sets-of-support that contain the element; as long as there still exists at least one set of support for the requirement, no reverification is necessary.
